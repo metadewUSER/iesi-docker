@@ -1,15 +1,14 @@
-FROM ubuntu
+FROM centos:7.5.1804
 
-#ADD SOME NEEDED DEPENDENCIES
-RUN apt-get update && apt-get install -y \
-   nano \
-   software-properties-common \
-   wget
+RUN yum -y install java-1.8.0-openjdk less && \
+    yum clean all && \
+    rm -rf /var/cache/yum && \
+    echo OK
 
-#INSTALL JAVA JRE 1.8
-RUN add-apt-repository ppa:webupd8team/java
-RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
-RUN apt-get update && apt-get install -y oracle-java8-installer
+RUN yum -y install wget less && \
+    yum clean all && \
+    rm -rf /var/cache/yum && \
+    echo OK
 
 #SET WORKING DIRECTORY
 WORKDIR /home
